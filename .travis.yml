@@ -1,0 +1,11 @@
+# Here is the sample .travis.yml file:
+language: ruby
+
+rvm: # the Ruby versions to be used
+  - 2.0.0
+  - 1.9.3
+  - 1.9.2
+
+before_install:
+  - gem update # optional, update all gems
+  - gem install selenium-webdriver
