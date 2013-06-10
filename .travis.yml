@@ -9,3 +9,4 @@ rvm: # the Ruby versions to be used
 before_install:
   - gem update # optional, update all gems
   - gem install selenium-webdriver
+  - phantomjs --version # output the phantomjs version
