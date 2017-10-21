@@ -5,7 +5,9 @@ module Test
   class TestHomePage < Test::Unit::TestCase
 
     def setup
-      @driver = Selenium::WebDriver.for :phantomjs
+      options = Selenium::WebDriver::Chrome::Options.new
+      options.add_argument('--headless')
+      @driver = Selenium::WebDriver.for :chrome, options: options
       @driver.navigate.to('http://yizeng.me')
     end
 

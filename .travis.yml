@@ -1,12 +1,28 @@
-# Here is the sample .travis.yml file:
+# Sample .travis.yml file:
 language: ruby
 
-rvm: # the Ruby versions to be used
-  - 2.0.0
-  - 1.9.3
-  - 1.9.2
+sudo: required
+dist: trusty
+addons:
+  chrome: stable
+
+rvm:
+  - 2.2.6
+  - 2.3.5
+  - 2.4.2
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
 
 before_install:
-  - gem update # optional, update all gems
   - gem install selenium-webdriver
-  - phantomjs --version # output the phantomjs version
+  - wget -N https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip -P ~/Downloads
+  - unzip ~/Downloads/chromedriver_linux64.zip -d ~/Downloads
+  - sudo mv -f ~/Downloads/chromedriver /usr/local/share/
+  - sudo chmod +x /usr/local/share/chromedriver
+  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+  - sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+
+script:
+  - rake
